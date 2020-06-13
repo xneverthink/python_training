@@ -1,1 +1,1 @@
-# Repository for Python training
+# Репозиторий домашних работ по курсу ПДТ-Python-b15
