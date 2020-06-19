@@ -2,9 +2,9 @@
 from model.contact import Contact
 
 
-def test_add_contact(app):
+def test_mod_first_contact(app):
     app.session.login(username="admin", password="secret")
-    app.contact.register_user(
+    app.contact.mod_first_contact(
         Contact(name="name", first_name="firstName", middle_name="middleName", last_name="lastName",
                 nick_name="nickname", title="title", company="company", address="address2", home="phone",
                 mobile="mobile", work="work", fax="fax", email="email", email2="email2", email3="email3",
