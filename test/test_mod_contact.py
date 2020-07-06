@@ -3,7 +3,7 @@ from model.contact import Contact
 from random import randrange
 
 
-def test_mod_first_contact(app):
+def test_mod_random_contact(app):
     if app.contact.count() == 0:
         app.contact.create(
             Contact(name="name", first_name="firstName", middle_name="middleName", last_name="lastName",
@@ -24,4 +24,3 @@ def test_mod_first_contact(app):
     assert len(old_contacts) == len(new_contacts)
     old_contacts[index] = contact
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
-
