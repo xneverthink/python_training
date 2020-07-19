@@ -1,4 +1,4 @@
-from selenium.webdriver.support.ui import Select
+#from selenium.webdriver.support.ui import Select
 from model.contact import Contact
 import re
 
@@ -45,7 +45,7 @@ class ContactHelper:
     def mod_contact_by_index(self, index, contact):
         wd = self.app.wd
         self.open_home_page()
-        # wd.find_elements_by_name("selected[]")[index].click()
+        #wd.find_elements_by_name("selected[]")[index].click()
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(contact)
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
@@ -74,15 +74,15 @@ class ContactHelper:
         self.change_field_value("email2", contact.email2)
         self.change_field_value("email3", contact.email3)
         self.change_field_value("homepage", contact.homepage)
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
-        wd.find_element_by_xpath("//option[@value='3']").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
-        wd.find_element_by_xpath("//option[@value='May']").click()
+        #Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+        #wd.find_element_by_xpath("//option[@value='3']").click()
+        #Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+        #wd.find_element_by_xpath("//option[@value='May']").click()
         self.change_field_value("byear", contact.byear)
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        wd.find_element_by_xpath("(//option[@value='1'])[2]").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
-        wd.find_element_by_xpath("(//option[@value='April'])[2]").click()
+        #Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        #wd.find_element_by_xpath("(//option[@value='1'])[2]").click()
+        #Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+        #wd.find_element_by_xpath("(//option[@value='April'])[2]").click()
         self.change_field_value("ayear", contact.ayear)
         self.change_field_value("address2", contact.address2)
         self.change_field_value("phone2", contact.phone2)
@@ -106,10 +106,10 @@ class ContactHelper:
                 last_name = cells[1].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 all_phones = cells[5].text
-                secondary_address = cells[3].text
+                address2 = cells[3].text
                 all_emails = cells[4].text
                 self.contact_cache.append(Contact(first_name=first_name, last_name=last_name, id=id,
-                                                  all_phones_from_home_page=all_phones, address2=secondary_address,
+                                                  all_phones_from_home_page=all_phones, address2=address2,
                                                   all_emails_from_home_page=all_emails))
         return list(self.contact_cache)
 
@@ -130,20 +130,20 @@ class ContactHelper:
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
         self.open_contact_edit_by_index(index)
-        firstname = wd.find_element_by_name("firstname").get_attribute("value")
-        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        first_name = wd.find_element_by_name("firstname").get_attribute("value")
+        last_name = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
-        homephone = wd.find_element_by_name("home").get_attribute("value")
-        workphone = wd.find_element_by_name("work").get_attribute("value")
-        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
-        secondaryphone = wd.find_element_by_name("phone2").get_attribute("value")
-        secondaryaddress = wd.find_element_by_name("address2").get_attribute("value")
+        home = wd.find_element_by_name("home").get_attribute("value")
+        work = wd.find_element_by_name("work").get_attribute("value")
+        mobile = wd.find_element_by_name("mobile").get_attribute("value")
+        phone2 = wd.find_element_by_name("phone2").get_attribute("value")
+        address2 = wd.find_element_by_name("address2").get_attribute("value")
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
-        return Contact(first_name=firstname, last_name=lastname, id=id,
-                       home=homephone, mobile=mobilephone, work=workphone, phone2=secondaryphone,
-                       address2=secondaryaddress, email=email, email2=email2, email3=email3)
+        return Contact(first_name=first_name, last_name=last_name, id=id,
+                       home=home, mobile=mobile, work=work, phone2=phone2,
+                       address2=address2, email=email, email2=email2, email3=email3)
 
     def get_contact_from_detail_page(self, index):
         wd = self.app.wd
