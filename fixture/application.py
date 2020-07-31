@@ -12,7 +12,7 @@ class Application:
             self.wd = webdriver.Firefox()
         elif browser == "chrome":
             options = Options()
-            options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chrom.exe"
+            options.binary_location = "C:/Program Files (x86)/Google/Chrome/Application/chromee.exe"
             self.wd = webdriver.Chrome(options=options)
             #self.wd = webdriver.Chrome()
         elif browser == "ie":
