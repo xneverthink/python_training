@@ -26,11 +26,11 @@ class GroupHelper:
         self.change_field_value("group_header", group.header)
         self.change_field_value("group_footer", group.footer)
 
-    def create(self, group):
+    def create(self, group_data):
         wd = self.app.wd
         self.open_groups_page()
         wd.find_element_by_name("new").click()
-        self.fill_group_form(group)
+        self.fill_group_form(group_data)
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
         self.group_cache = None

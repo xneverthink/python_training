@@ -18,10 +18,10 @@ class ContactHelper:
         if not (wd.current_url.endswith("/addressbook/") and len(wd.find_elements_by_name("add")) > 0):
             wd.find_element_by_link_text("home").click()
 
-    def create(self, contact):
+    def create(self, contact_data):
         wd = self.app.wd
         self.open_user_registration_page()
-        self.fill_contact_form(contact)
+        self.fill_contact_form(contact_data)
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         wd.find_element_by_link_text("home page").click()
         self.contact_cache = None
@@ -60,12 +60,12 @@ class ContactHelper:
     def mod_first_contact(self):
         self.mod_contact_by_index(0)
 
-    def mod_contact_by_index(self, index, contact):
+    def mod_contact_by_index(self, index, contact_data):
         wd = self.app.wd
         self.open_home_page()
         #wd.find_elements_by_name("selected[]")[index].click()
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
-        self.fill_contact_form(contact)
+        self.fill_contact_form(contact_data)
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.contact_cache = None
 
