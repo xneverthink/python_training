@@ -26,13 +26,31 @@ class ContactHelper:
         wd.find_element_by_link_text("home page").click()
         self.contact_cache = None
 
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
 
     def delete_contact_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
-        wd.find_elements_by_name("selected[]")[index].click()
+        self.select_contact_by_index(index)
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        wd.find_elements_by_css_selector("div.msgbox")
+        self.open_home_page()
+        self.contact_cache = None
+
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_elements_by_css_selector("div.msgbox")
@@ -106,10 +124,10 @@ class ContactHelper:
                 last_name = cells[1].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 all_phones = cells[5].text
-                address2 = cells[3].text
+                address = cells[3].text
                 all_emails = cells[4].text
                 self.contact_cache.append(Contact(first_name=first_name, last_name=last_name, id=id,
-                                                  all_phones_from_home_page=all_phones, address2=address2,
+                                                  all_phones_from_home_page=all_phones, address=address,
                                                   all_emails_from_home_page=all_emails))
         return list(self.contact_cache)
 
