@@ -4,6 +4,16 @@ from model.contact import Contact
 import re
 
 
+def clean_contact_info_from_db(contact):
+    return Contact(id=contact.id, firstname=contact.firstname.strip(),
+                   lastname=contact.lastname.strip(), address=contact.address.strip(),
+                   all_emails=contact.all_emails, all_phones=contact.all_phones)
+
+
+def clean_group_info_from_db(group):
+    return Group(id=group.id, name=group.name.strip())
+
+
 class DbFixture:
 
     def __init__(self, host, name, user, password):

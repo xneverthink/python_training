@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
 import random
+from fixture.db import clean_group_info_from_db
 
 
 def test_mod_group(app, db, json_groups, check_ui):
@@ -15,7 +16,5 @@ def test_mod_group(app, db, json_groups, check_ui):
     #old_groups[index] = group
     #assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
     if check_ui:
-        def clean(group):
-            return Group(id=group.id, name=group.name.strip())
-        db_list = map(clean, new_groups)
+        db_list = map(clean_group_info_from_db, new_groups)
         assert sorted(db_list, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
