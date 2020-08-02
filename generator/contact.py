@@ -27,14 +27,14 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-testdata = [Contact(name="", first_name="", middle_name="", last_name="",
-                    nick_name="", title="", company="", address="", home="",
+testdata = [Contact(name="", firstname="", middlename="", lastname="",
+                    nickname="", title="", company="", address="", home="",
                     mobile="", work="", fax="", email="", email2="", email3="",
                     homepage="", byear="", ayear="", address2="", phone2="",
                     notes="")] + [
-               Contact(name=random_string("name", 10), first_name=random_string("first_name", 10),
-                       middle_name=random_string("middle_name", 10), last_name=random_string("last_name", 10),
-                       nick_name=random_string("nick_name", 10), title=random_string("title", 10),
+               Contact(name=random_string("name", 10), firstname=random_string("first_name", 10),
+                       middlename=random_string("middle_name", 10), lastname=random_string("last_name", 10),
+                       nickname=random_string("nick_name", 10), title=random_string("title", 10),
                        company=random_string("company", 10), address=random_string("address", 10),
                        home=random_string("home", 10), mobile=random_string("mobile", 10),
                        work=random_string("work", 10), fax=random_string("fax", 10), email=random_string("email", 10),

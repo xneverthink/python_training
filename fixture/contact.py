@@ -1,4 +1,3 @@
-#from selenium.webdriver.support.ui import Select
 from model.contact import Contact
 import re
 
@@ -75,36 +74,36 @@ class ContactHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def fill_contact_form(self, contact):
+    def fill_contact_form(self, contact_data):
         wd = self.app.wd
-        self.change_field_value("firstname", contact.first_name)
-        self.change_field_value("middlename", contact.middle_name)
-        self.change_field_value("lastname", contact.last_name)
-        self.change_field_value("nickname", contact.nick_name)
-        self.change_field_value("title", contact.title)
-        self.change_field_value("company", contact.company)
-        self.change_field_value("address", contact.address)
-        self.change_field_value("home", contact.home)
-        self.change_field_value("mobile", contact.mobile)
-        self.change_field_value("work", contact.work)
-        self.change_field_value("fax", contact.fax)
-        self.change_field_value("email", contact.email)
-        self.change_field_value("email2", contact.email2)
-        self.change_field_value("email3", contact.email3)
-        self.change_field_value("homepage", contact.homepage)
+        self.change_field_value("firstname", contact_data.firstname)
+        self.change_field_value("middlename", contact_data.middlename)
+        self.change_field_value("lastname", contact_data.lastname)
+        self.change_field_value("nickname", contact_data.nickname)
+        self.change_field_value("title", contact_data.title)
+        self.change_field_value("company", contact_data.company)
+        self.change_field_value("address", contact_data.address)
+        self.change_field_value("home", contact_data.home)
+        self.change_field_value("mobile", contact_data.mobile)
+        self.change_field_value("work", contact_data.work)
+        self.change_field_value("fax", contact_data.fax)
+        self.change_field_value("email", contact_data.email)
+        self.change_field_value("email2", contact_data.email2)
+        self.change_field_value("email3", contact_data.email3)
+        self.change_field_value("homepage", contact_data.homepage)
         #Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
         #wd.find_element_by_xpath("//option[@value='3']").click()
         #Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
         #wd.find_element_by_xpath("//option[@value='May']").click()
-        self.change_field_value("byear", contact.byear)
+        self.change_field_value("byear", contact_data.byear)
         #Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
         #wd.find_element_by_xpath("(//option[@value='1'])[2]").click()
         #Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
         #wd.find_element_by_xpath("(//option[@value='April'])[2]").click()
-        self.change_field_value("ayear", contact.ayear)
-        self.change_field_value("address2", contact.address2)
-        self.change_field_value("phone2", contact.phone2)
-        self.change_field_value("notes", contact.notes)
+        self.change_field_value("ayear", contact_data.ayear)
+        self.change_field_value("address2", contact_data.address2)
+        self.change_field_value("phone2", contact_data.phone2)
+        self.change_field_value("notes", contact_data.notes)
 
     def count(self):
         wd = self.app.wd
@@ -126,9 +125,9 @@ class ContactHelper:
                 all_phones = cells[5].text
                 address = cells[3].text
                 all_emails = cells[4].text
-                self.contact_cache.append(Contact(first_name=first_name, last_name=last_name, id=id,
-                                                  all_phones_from_home_page=all_phones, address=address,
-                                                  all_emails_from_home_page=all_emails))
+                self.contact_cache.append(Contact(firstname=first_name, lastname=last_name, id=id,
+                                                  all_phones=all_phones, address=address,
+                                                  all_emails=all_emails))
         return list(self.contact_cache)
 
     def open_contact_edit_by_index(self, index):
@@ -159,7 +158,7 @@ class ContactHelper:
         email = wd.find_element_by_name("email").get_attribute("value")
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
-        return Contact(first_name=first_name, last_name=last_name, id=id,
+        return Contact(firstname=first_name, lastname=last_name, id=id,
                        home=home, mobile=mobile, work=work, phone2=phone2,
                        address2=address2, email=email, email2=email2, email3=email3)
 
