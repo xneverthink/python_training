@@ -4,7 +4,7 @@ from random import randrange
 from fixture.db import clean_contact_info_from_db
 
 
-def test_mod_random_contact(app, db, json_contacts, check_ui):
+def test_mod_contact(app, db, json_contacts, check_ui):
     contact_data = json_contacts
     if len(db.get_contact_list()) == 0:
         app.contact.create(

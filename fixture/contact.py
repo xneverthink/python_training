@@ -1,5 +1,7 @@
 from model.contact import Contact
 import re
+from selenium.webdriver.support.ui import Select
+import random
 
 
 class ContactHelper:
@@ -171,3 +173,22 @@ class ContactHelper:
         work = re.search("W: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(home=home, mobile=mobile, work=work, phone2=phone2)
+
+    def add_contact_to_group_by_id(self, id, group_name):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        Select(wd.find_element_by_name("to_group")).select_by_visible_text(group_name)
+        wd.find_element_by_name("add").click()
+
+    def select_group_by_name(self, group_name):
+        wd = self.app.wd
+        Select(wd.find_element_by_name("group")).select_by_visible_text(group_name)
+
+    def delete_contact_from_group_by_id(self, group_name, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_group_by_name(group_name)
+        wd.find_element_by_name("remove")
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("remove").click()
