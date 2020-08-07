@@ -1,7 +1,6 @@
 import pymysql.cursors
 from model.group import Group
 from model.contact import Contact
-import re
 
 
 def clean_contact_info_from_db(contact):
@@ -49,14 +48,7 @@ class DbFixture:
                                     nickname=nickname, company=company, title=title, address=address,
                                     home=home, mobile=mobile, work=work, fax=fax, email=email, email2=email2,
                                     email3=email3, homepage=homepage, address2=address2, phone2=phone2,
-                                    notes=notes, all_emails="\n".join(filter(lambda x: x != "",
-                                                                             filter(lambda x: x is not None,
-                                                                                    [email, email2, email3]))),
-                                    all_phones="\n".join(filter(lambda x: x != "", map(lambda x:
-                                                                                       re.sub("[/() -]", "", x),
-                                                                                       filter(lambda x: x is not None,
-                                                                                              [home, mobile, work,
-                                                                                               phone2]))))))
+                                    notes=notes))
         finally:
             cursor.close()
         return list
