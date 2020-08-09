@@ -90,5 +90,17 @@ class DbFixture:
             cursor.close()
         return contact_ids
 
+    def get_contacts_without_group(self):
+        contact_ids = []
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select id from addressbook where id not in (select id from address_in_groups)")
+            for row in cursor:
+                (id) = row
+                contact_ids.append(id)
+        finally:
+            cursor.close()
+        return contact_ids
+
     def destroy(self):
         self.connection.close()

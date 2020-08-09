@@ -4,7 +4,7 @@ import random
 
 
 def test_add_contact_to_group_random(app, db):
-    if len(db.get_contact_list()) == 0:
+    if len(db.get_contact_list()) == 0 or len(db.get_contacts_without_group()) == 0:
         app.contact.create(
             Contact(name="name", firstname="firstName", middlename="middleName", lastname="lastName",
                     nickname="nickname", title="title", company="company", address="address2", home="phone",
